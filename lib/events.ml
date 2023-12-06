@@ -363,7 +363,7 @@ let stream ?switch ?event_types config =
          internal errors of some of the upstream libraries (ez_api, cohttp, or
          conduit, I am not sure).
        *)
-      if code < 0 || 400 <= code && code < 500 then begin
+      if 400 <= code && code < 500 then begin
         push None;
         Lwt.fail_with ("HTTP client error " ^ string_of_int code)
       end else
