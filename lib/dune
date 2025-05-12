@@ -10,6 +10,7 @@
   json-data-encoding
   yojson
   logs
+  logs.lwt
   lwt
   lwt.unix
   ez_file
