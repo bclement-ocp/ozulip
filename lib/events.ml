@@ -365,7 +365,11 @@ let stream ?switch ?event_types config =
        *)
       if code < 0 || 400 <= code && code < 500 then begin
         push None;
-        Lwt.fail_with ("HTTP client error " ^ string_of_int code)
+        Lwt.fail_with (
+          Format.asprintf "HTTP client error %d: %a"
+            code
+            Format.(pp_print_option pp_print_string) status
+        )
       end else
         (* TODO: only register a new queue if we get a BAD_EVENT_QUEUE_ID error
            code. But I do not know how to get that information.
